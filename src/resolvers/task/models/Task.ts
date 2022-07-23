@@ -1,24 +1,24 @@
 // describiremos una clase con las propiedades y campos de Grahpql
+import { boolean, string } from "@tsed/schema";
 import { ObjectType, Field, ID, InputType } from "type-graphql";
 
 @ObjectType({ description: 'Object representing task in list task' })
 export class Task {
 
-      @Field(() => ID)
-      id: number;
+      @Field(() => ID, { description: 'id de la tarea' })
+      readonly id: string;
 
-      @Field()
+      @Field(type => String, { description: 'titulo de la tarea' })
       title: string;
 
-      @Field()
+      @Field(type => String, { description: 'descripcion de la tarea' })
       description: string;
 
-      @Field({ defaultValue: false })
+      @Field(type => Boolean, { description: 'Fecha de expicion de una tarea' })
       dateExpiration: boolean;
-
       /*
       @Field()
-      creationDate: Date;
+      readonly createdAt: Date;
       */
 
       constructor(options: Partial<Task> = {}) {
