@@ -3,7 +3,7 @@ import { Task } from "../resolvers/task/models/Task";
 
 @Injectable()
 export class TaskService {
-      async findById(id: number) {
+      async findById(id: string) {
             return new Task({ id });
       }
 

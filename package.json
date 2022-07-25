@@ -9,6 +9,7 @@
     "start:prod": "cross-env NODE_ENV=production node dist/index.js"
   },
   "dependencies": {
+    "@prisma/client": "^4.1.0",
     "@tsed/ajv": "^6.117.2",
     "@tsed/common": "^6.117.2",
     "@tsed/core": "^6.117.2",
@@ -59,6 +60,7 @@
     "@types/node": "^18.0.6",
     "@types/validator": "^13.7.4",
     "apollo-server-testing": "^2.25.3",
+    "prisma": "^4.1.0",
     "ts-node": "^10.9.1",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.0.0",
