@@ -7,3 +7,5 @@ export * from "./recipes/RecipeNotFoundError";
 export * from "./recipes/RecipeResolver";
 export * from "./task/models/Task";
 export * from "./task/resolvers/TaskResolver";
+export * from "./user/models/User";
+export * from "./user/resolvers/UserResolver";

@@ -1,6 +1,14 @@
 // describiremos una clase con las propiedades y campos de Grahpql
-import { boolean, string } from "@tsed/schema";
-import { ObjectType, Field, ID, InputType } from "type-graphql";
+import { Any, DateTime, datetime } from "@tsed/schema";
+import { ResolverService } from "@tsed/typegraphql";
+import { ObjectType, Field, ID, InputType, buildSchema } from "type-graphql";
+import { resolvers } from "@generated/type-graphql";
+/*
+const schema = await buildSchema({
+      resolvers,
+      dateScalarMode: "timestamp", // "timestamp" or "isoDate"
+    });
+    */
 
 @ObjectType({ description: 'Object representing task in list task' })
 export class Task {
@@ -14,19 +22,21 @@ export class Task {
       @Field(type => String, { description: 'descripcion de la tarea' })
       description: string;
 
+
       @Field(type => Boolean, { description: 'Fecha de expicion de una tarea' })
       dateExpiration: boolean;
-      /*
-      @Field()
-      readonly createdAt: Date;
-      */
+
+
+      //TODO: el tipo de dato es incorrecto buscar datetime
+      @Field(type => Date)
+      readonly createAt: Date;
 
       constructor(options: Partial<Task> = {}) {
             options.id && (this.id = options.id);
             options.title && (this.title = options.title);
             options.description && (this.description = options.description);
             options.dateExpiration && (this.dateExpiration = options.dateExpiration);
-            //options.creationDate && (this.creationDate = options.creationDate);
+            options.createAt && (this.createAt = options.createAt);
       }
 }
 

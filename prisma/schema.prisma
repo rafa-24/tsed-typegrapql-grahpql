@@ -5,6 +5,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator typegraphql {
+  provider = "typegraphql-prisma"
+}
+
 datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
@@ -13,9 +17,17 @@ datasource db {
 // crear un modelo para las Task
 
 model Task {
-  id String    @id @default(auto()) @map("_id") @db.ObjectId
-  title String
-  description String
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  description    String
   dateExpiration Boolean
+  createdAt      DateTime @default(now()) // aqui iva now()
+  updatedAt      DateTime @updatedAt
 }
 
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  username  String
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
+}

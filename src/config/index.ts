@@ -1,7 +1,8 @@
-import {readFileSync} from "fs";
-import {envs} from "./envs/index";
+import { readFileSync } from "fs";
+import { envs } from "./envs/index";
 import loggerConfig from "./logger/index";
-const pkg = JSON.parse(readFileSync("./package.json", {encoding: "utf8"}));
+const pkg = JSON.parse(readFileSync("./package.json", { encoding: "utf8" }));
+import { resolvers } from "@generated/type-graphql";
 
 export const config: Partial<TsED.Configuration> = {
   version: pkg.version,
@@ -10,6 +11,7 @@ export const config: Partial<TsED.Configuration> = {
   graphql: {
     default: {
       path: "/graphql",
+      //resolvers: resolvers as any,
       buildSchemaOptions: {
       }
     }
