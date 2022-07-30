@@ -1,6 +1,6 @@
 import { ResolverService } from "@tsed/typegraphql";
-import { Query, Arg, Mutation } from "type-graphql";
-import { Task, TaskInput } from "../models/Task";
+import { Query, Arg, Mutation, Ctx } from "type-graphql";
+import { Task, TaskCreateInput, TaskUpdateInput } from "@generated/type-graphql";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -19,19 +19,19 @@ export class TaskResolver {
 
       // Leer una task en especifico 
       @Query(Returns => Task)
-      async findTaskById(@Arg('id') id: string) {
-
-            const task = prisma.task.findUnique({
+      async findTaskById(@Arg('id') id: string, @Ctx() context: any) { // contexto
+            const task = context.prisma.task.findUnique({
                   where: {
                         id: id
                   }
             });
+            console.log(context);
             return task;
       }
 
       // Crear una nueva tarea 
       @Mutation(() => Task)
-      async createTask(@Arg('input') input: TaskInput) {
+      async createTask(@Arg('input') input: TaskCreateInput) {
             const newTask = await prisma.task.create({
                   data: {
                         title: input.title,
@@ -49,7 +49,7 @@ export class TaskResolver {
       @Mutation(() => Task)
       async updateTask(
             @Arg("id") id: string,
-            @Arg("input") input: TaskInput
+            @Arg("input") input: TaskUpdateInput
       ): Promise<any> {
             const taskUpdate = prisma.task.update({
                   where: {

@@ -1,7 +1,7 @@
 import { Returns } from "@tsed/schema";
 import { ResolverService } from "@tsed/typegraphql";
 import { Query, Arg, Mutation } from "type-graphql";
-import { User, UserInput } from "../models/User";
+import { UserCreateInput, User, UserUpdateInput } from "@generated/type-graphql";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
@@ -11,7 +11,7 @@ export class UserResolver {
 
       // Crear un usuario
       @Mutation(Returns => User)
-      async createUser(@Arg('input') input: UserInput) {
+      async createUser(@Arg('input') input: UserCreateInput) {
             const newUser = await prisma.user.create({
                   data: {
                         username: input.username
@@ -23,7 +23,7 @@ export class UserResolver {
 
       // Actualizar un usuario
       @Mutation(Returns => User)
-      async updateUser(@Arg('id') id: string, @Arg('newUser') newUser: UserInput) {
+      async updateUser(@Arg('id') id: string, @Arg('newUser') newUser: UserUpdateInput) {
             const user = await prisma.user.update({
                   where: {
                         id: id
